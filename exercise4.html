@@ -2,75 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DOM Exercise</title>
-
+    <title>Title</title>
     <script>
+        window.onload = function () {
+            var output = '';
+            for (var i=0; i<256; i++) {
+                output += '<div></div>';
+            }
+            document.body.innerHTML = output;
+            var divs = document.querySelectorAll('div');
+            for (var i=0; i<divs.length; i++) {
+                var div = divs[i];
+                div.style.height = '2px';
+                div.style.background = 'rgb(' +i +','+i+','+i+')';
+            }
+        };
         var first_val;
-        var second_val;
         var operand;
+
         function display_debug() {
             var debug_out = document.getElementById("debug_area");
-            debug_area.style.color = 'gray';
-            debug_area.style.background = 'pink';
             var debug_text = "<p>first_val:" + first_val + "</p>";
             debug_text += "<p>operand:" + operand + "</p>";
             debug_out.innerHTML = debug_text;
+            debug_area.style.color = "red";
+            debug_area.style.background = "black";
         }
+
         function button_click() {
             var text = document.getElementById("text_display");
             var num = this.textContent;
             text.value = text.value + num;
+
             display_debug();
         }
+
         function button_plus() {
             var text = document.getElementById("text_display");
             first_val = parseInt(text.value);
             text.value = '';
             operand = 'plus';
+
             display_debug();
         }
+
         function button_minus() {
             var text = document.getElementById("text_display");
             first_val = parseInt(text.value);
             text.value = '';
             operand = 'minus';
+
             display_debug();
         }
-        function button_multiply() {
+
+        function button_multiple() {
             var text = document.getElementById("text_display");
             first_val = parseInt(text.value);
             text.value = '';
-            operand = 'multiply';
+            operand = 'multiple';
+
+            display_debug();
         }
-        function button_devide() {
+
+        function button_division() {
             var text = document.getElementById("text_display");
             first_val = parseInt(text.value);
             text.value = '';
-            operand = 'devide';
+            operand = 'division';
+
+            display_debug();
         }
+
         function button_equal() {
             var text = document.getElementById("text_display");
             var second_val = parseInt(text.value);
             if (operand == 'plus') {
                 text.value = '' + (first_val + second_val);
             }
-            else if (operand=='minus'){
+            else if (operand == 'minus') {
                 text.value = '' + (first_val - second_val);
             }
-            else if (operand=='multiply'){
+            else if (operand == 'multiple') {
                 text.value = '' + (first_val * second_val);
             }
-            else if (operand=='devide'){
+            else if (operand == 'divsion') {
                 text.value = '' + (first_val / second_val);
             }
+            operand = '';
+
             display_debug();
         }
+
         function button_clear() {
             var text = document.getElementById("text_display");
             text.value = '';
             operand = '';
+
             display_debug();
         }
+
         window.onload = function (e) {
             var buttons = document.getElementsByClassName("num_btn");
             for (var i = 0; i < buttons.length; i++) {
@@ -78,8 +108,8 @@
             }
             document.getElementById("btn_plus").onclick = button_plus;
             document.getElementById("btn_minus").onclick = button_minus;
-            document.getElementById("btn_multiply").onclick = button_multiply;
-            document.getElementById("btn_devide").onclick = button_devide;
+            document.getElementById("btn_multiple").onclick = button_multiple;
+            document.getElementById("btn_division").onclick = button_division;
             document.getElementById("btn_equal").onclick = button_equal;
             document.getElementById("btn_clear").onclick = button_clear;
         }
@@ -101,12 +131,11 @@
 <button class="num_btn">9</button>
 <button id="btn_minus">-</button><br/>
 <button class="num_btn">0</button>
-<button id="btn_multiply">×</button>
-<button id="btn_devide">÷</button></br>
-
+<button id="btn_multiple">×</button>
+<button id="btn_division">÷</button>
 <button id="btn_equal">=</button><br/>
 
-<div id="debug_area">
-</div>
+<div id="debug_area"></div>
+
 </body>
 </html>
